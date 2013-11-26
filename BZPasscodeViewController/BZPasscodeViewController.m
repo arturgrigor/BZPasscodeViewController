@@ -65,6 +65,28 @@ typedef NSUInteger UIInterfaceOrientationMask;
 
 #define kDefaultPasscodeLength  4
 
+#pragma mark Helpers
+
+NSUInteger DeviceSystemMajorVersion()
+{
+//    static NSUInteger _deviceSystemMajorVersion = -1;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] integerValue];
+//    });
+//    return _deviceSystemMajorVersion;
+    
+    return 6;
+}
+
+#pragma mark - NSBundle Category
+
+@interface NSBundle (BZImage)
+
+- (UIImage *)properImageNamed:(NSString *)name withExtension:(NSString *)extension;
+
+@end
+
 @interface BZPasscodeFieldController ()
 @property(nonatomic,copy) NSString *passcode;
 @property(nonatomic,copy) NSString *text;
@@ -131,25 +153,35 @@ typedef NSUInteger UIInterfaceOrientationMask;
     [super viewDidLoad];
     self.view.frame = CGRectMake(0, 0, 320, 200);
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"BZPasscodeViewController" ofType:@"bundle"]];
-    NSString *path = [bundle pathForResource:@"passcode_field_background_opaque" ofType:@"png"];
-    UIImage *image = [UIImage imageWithContentsOfFile:path];
+    UIImage *image = [bundle properImageNamed:@"passcode_field_background_opaque" withExtension:@"png"];
     if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] == NSOrderedAscending) {
         // 4.3.x or earlier
         image = [image stretchableImageWithLeftCapWidth:5 topCapHeight:26];
     } else {
-        // 5.0 or later
-        UIEdgeInsets capInsets = UIEdgeInsetsMake(26, 5, 26, 5);
-        image = [image resizableImageWithCapInsets:capInsets];
+        if (DeviceSystemMajorVersion() < 7)
+        {
+            // 5.0.0 - 6.1.x
+            
+            UIEdgeInsets capInsets = UIEdgeInsetsMake(26, 5, 26, 5);
+            image = [image resizableImageWithCapInsets:capInsets];
+        } else
+        {
+            // Custom image for iOS 7 which doesn't need resizing
+        }
     }
+    [passcode0Field_ setBackgroundColor:[UIColor clearColor]];
     [passcode0Field_ setBackground:image];
+    [passcode1Field_ setBackgroundColor:[UIColor clearColor]];
     [passcode1Field_ setBackground:image];
+    [passcode2Field_ setBackgroundColor:[UIColor clearColor]];
     [passcode2Field_ setBackground:image];
+    [passcode3Field_ setBackgroundColor:[UIColor clearColor]];
     [passcode3Field_ setBackground:image];
+    
     [self updatePasscodeFields];
     textLabel_.text = text_;
     detailTextLabel_.text = detailText_;
-    path = [bundle pathForResource:@"detail_text_highlight_background" ofType:@"png"];
-    image = [UIImage imageWithContentsOfFile:path];
+    image = [bundle properImageNamed:@"detail_text_highlight_background" withExtension:@"png"];
     if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] == NSOrderedAscending) {
         // 4.3.x or earlier
         image = [image stretchableImageWithLeftCapWidth:13 topCapHeight:13];
@@ -386,23 +418,22 @@ typedef NSUInteger UIInterfaceOrientationMask;
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
     // keypadImageView
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"BZPasscodeViewController" ofType:@"bundle"]];
-    NSString *path = [bundle pathForResource:@"keypad" ofType:@"png"];
-    UIImage *image = [UIImage imageWithContentsOfFile:path];
+    UIImage *image = [bundle properImageNamed:@"keypad" withExtension:@"png"];
     keypadImageView_.image = image;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         // keypadDelButton
-        path = [bundle pathForResource:@"keypad_delete" ofType:@"png"];
-        image = [UIImage imageWithContentsOfFile:path];
+        image = [bundle properImageNamed:@"keypad_delete" withExtension:@"png"];
         [keypadDelButton_ setImage:image forState:UIControlStateNormal];
         keypadDelButton_.adjustsImageWhenHighlighted = NO;
     }
     // keypadButtons
-    path = [bundle pathForResource:@"keypad_pressed" ofType:@"png"];
-    image = [UIImage imageWithContentsOfFile:path];
+    image = [bundle properImageNamed:@"keypad_pressed" withExtension:@"png"];
     CGPoint point = keypadImageView_.frame.origin;
     CGFloat scale = [image respondsToSelector:@selector(scale)] ? image.scale : 1;
     CGAffineTransform t = CGAffineTransformConcat(CGAffineTransformMakeTranslation(-point.x, -point.y), CGAffineTransformMakeScale(scale, scale));
@@ -427,7 +458,7 @@ typedef NSUInteger UIInterfaceOrientationMask;
         [tockPlayer_ pause];
         tockPlayer_.currentTime = 0;
     }
-    tockPlayer_.volume = 0.2;
+    tockPlayer_.volume = 0.03f;
 #endif
     // currentPasscodeFieldController
     self.currentPasscodeFieldController = passcodeFieldController1_;
@@ -616,6 +647,32 @@ typedef NSUInteger UIInterfaceOrientationMask;
     BZPasscodeFieldController *nextPasscodeFieldController = context;
     self.currentPasscodeFieldController = nextPasscodeFieldController;
     self.view.userInteractionEnabled = YES;
+}
+
+@end
+
+@implementation NSBundle (BZImage)
+
+- (UIImage *)properImageNamed:(NSString *)name withExtension:(NSString *)extension
+{
+    NSString *properName = nil;
+    NSString *path = nil;
+    
+    // Try using the current iOS version suffix first
+    
+    properName = [name stringByAppendingFormat:@"-ios%d",
+                  DeviceSystemMajorVersion()];
+    path = [self pathForResource:properName
+                          ofType:extension];
+    
+    if (! path)
+    {
+        properName = name;
+        path = [self pathForResource:properName
+                              ofType:extension];
+    }
+    
+    return [UIImage imageWithContentsOfFile:path];
 }
 
 @end

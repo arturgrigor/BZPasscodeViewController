@@ -25,11 +25,11 @@
 		D70DA1D916FF115400935E20 /* PasscodeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D70DA1D816FF115400935E20 /* PasscodeDemoViewController.m */; };
 		D7AD45E51700716200A64136 /* PasscodeLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7AD45E41700716200A64136 /* PasscodeLockViewController.m */; };
 		D7CCF598170457AE00B07C3A /* BZPasscodeFieldController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7CCF591170457AE00B07C3A /* BZPasscodeFieldController.xib */; };
-		D7CCF599170457AE00B07C3A /* BZPasscodeViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D7CCF592170457AE00B07C3A /* BZPasscodeViewController.bundle */; };
 		D7CCF59A170457AE00B07C3A /* BZPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CCF594170457AE00B07C3A /* BZPasscodeViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -DBZ_USE_SOUND"; }; };
 		D7CCF59B170457AE00B07C3A /* BZPasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7CCF595170457AE00B07C3A /* BZPasscodeViewController.xib */; };
 		D7CCF59C170457AE00B07C3A /* BZPasscodeViewControllerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CCF597170457AE00B07C3A /* BZPasscodeViewControllerHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D7CCF59E1704581900B07C3A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CCF59D1704581900B07C3A /* AVFoundation.framework */; };
+		FE4550A618456B10001C5509 /* BZPasscodeViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE4550A518456B10001C5509 /* BZPasscodeViewController.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,13 +60,13 @@
 		D7AD45E31700716200A64136 /* PasscodeLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasscodeLockViewController.h; sourceTree = "<group>"; };
 		D7AD45E41700716200A64136 /* PasscodeLockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasscodeLockViewController.m; sourceTree = "<group>"; };
 		D7CCF591170457AE00B07C3A /* BZPasscodeFieldController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BZPasscodeFieldController.xib; sourceTree = "<group>"; };
-		D7CCF592170457AE00B07C3A /* BZPasscodeViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BZPasscodeViewController.bundle; sourceTree = "<group>"; };
 		D7CCF593170457AE00B07C3A /* BZPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZPasscodeViewController.h; sourceTree = "<group>"; };
 		D7CCF594170457AE00B07C3A /* BZPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZPasscodeViewController.m; sourceTree = "<group>"; };
 		D7CCF595170457AE00B07C3A /* BZPasscodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BZPasscodeViewController.xib; sourceTree = "<group>"; };
 		D7CCF596170457AE00B07C3A /* BZPasscodeViewControllerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZPasscodeViewControllerHelper.h; sourceTree = "<group>"; };
 		D7CCF597170457AE00B07C3A /* BZPasscodeViewControllerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZPasscodeViewControllerHelper.m; sourceTree = "<group>"; };
 		D7CCF59D1704581900B07C3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FE4550A518456B10001C5509 /* BZPasscodeViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BZPasscodeViewController.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,9 +159,9 @@
 		D7CCF590170457AE00B07C3A /* BZPasscodeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FE4550A518456B10001C5509 /* BZPasscodeViewController.bundle */,
 				D7CCF591170457AE00B07C3A /* BZPasscodeFieldController.xib */,
 				874ACCBC1712EF510056C6B9 /* BZPasscodeFieldController~iphone.xib */,
-				D7CCF592170457AE00B07C3A /* BZPasscodeViewController.bundle */,
 				D7CCF593170457AE00B07C3A /* BZPasscodeViewController.h */,
 				D7CCF594170457AE00B07C3A /* BZPasscodeViewController.m */,
 				D7CCF595170457AE00B07C3A /* BZPasscodeViewController.xib */,
@@ -225,11 +225,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7CCF598170457AE00B07C3A /* BZPasscodeFieldController.xib in Resources */,
-				D7CCF599170457AE00B07C3A /* BZPasscodeViewController.bundle in Resources */,
 				D7CCF59B170457AE00B07C3A /* BZPasscodeViewController.xib in Resources */,
 				D70DA1C416FF0D2900935E20 /* Default.png in Resources */,
 				D70DA1C616FF0D2900935E20 /* Default@2x.png in Resources */,
 				D70DA1C816FF0D2900935E20 /* Default-568h@2x.png in Resources */,
+				FE4550A618456B10001C5509 /* BZPasscodeViewController.bundle in Resources */,
 				D70DA1BC16FF0D2900935E20 /* InfoPlist.strings in Resources */,
 				D70DA1CE16FF0D2900935E20 /* MainStoryboard_iPad.storyboard in Resources */,
 				D70DA1CB16FF0D2900935E20 /* MainStoryboard_iPhone.storyboard in Resources */,
