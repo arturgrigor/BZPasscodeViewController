@@ -67,16 +67,14 @@ typedef NSUInteger UIInterfaceOrientationMask;
 
 #pragma mark Helpers
 
-NSUInteger DeviceSystemMajorVersion()
+NSUInteger BZDeviceSystemMajorVersion()
 {
-//    static NSUInteger _deviceSystemMajorVersion = -1;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] integerValue];
-//    });
-//    return _deviceSystemMajorVersion;
-    
-    return 6;
+    static NSUInteger _deviceSystemMajorVersion = -1;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] integerValue];
+    });
+    return _deviceSystemMajorVersion;
 }
 
 #pragma mark - NSBundle Category
@@ -158,7 +156,7 @@ NSUInteger DeviceSystemMajorVersion()
         // 4.3.x or earlier
         image = [image stretchableImageWithLeftCapWidth:5 topCapHeight:26];
     } else {
-        if (DeviceSystemMajorVersion() < 7)
+        if (BZDeviceSystemMajorVersion() < 7)
         {
             // 5.0.0 - 6.1.x
             
@@ -661,7 +659,7 @@ NSUInteger DeviceSystemMajorVersion()
     // Try using the current iOS version suffix first
     
     properName = [name stringByAppendingFormat:@"-ios%d",
-                  DeviceSystemMajorVersion()];
+                  BZDeviceSystemMajorVersion()];
     path = [self pathForResource:properName
                           ofType:extension];
     
