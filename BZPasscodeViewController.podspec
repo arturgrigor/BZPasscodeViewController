@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'BZPasscodeViewController'
-  s.version      = '1.1.1'
+  s.version      = '1.1.2'
   s.summary      = 'Passcode view controller for iOS.'
   s.homepage     = 'https://github.com/arturgrigor/BZPasscodeViewController'
   s.license      = 'BSD'

@@ -591,14 +591,20 @@ NSUInteger BZDeviceSystemMajorVersion()
     }
     switch (result) {
         case BZPasscodeViewControllerResultInvalid:
+        {
             currentPasscodeFieldController_.passcode = nil;
             currentPasscodeFieldController_.text = text_;
             currentPasscodeFieldController_.detailText = detailText_;
             currentPasscodeFieldController_.detailTextHighlighted = detailTextHighlighted_;
+            
             break;
+        }
         case BZPasscodeViewControllerResultContinue:
+        {
             [self togglePasscodeFields];
+            
             break;
+        }
         case BZPasscodeViewControllerResultDone:
         default:
             // do nothing
