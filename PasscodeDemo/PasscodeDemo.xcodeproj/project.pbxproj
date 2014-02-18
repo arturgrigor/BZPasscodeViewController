@@ -30,6 +30,7 @@
 		D7CCF59C170457AE00B07C3A /* BZPasscodeViewControllerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D7CCF597170457AE00B07C3A /* BZPasscodeViewControllerHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D7CCF59E1704581900B07C3A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CCF59D1704581900B07C3A /* AVFoundation.framework */; };
 		FE4550A618456B10001C5509 /* BZPasscodeViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE4550A518456B10001C5509 /* BZPasscodeViewController.bundle */; };
+		FEDA906F18B4110100444DE9 /* BZPasscodeViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = FEDA907118B4110100444DE9 /* BZPasscodeViewController.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,8 @@
 		D7CCF597170457AE00B07C3A /* BZPasscodeViewControllerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZPasscodeViewControllerHelper.m; sourceTree = "<group>"; };
 		D7CCF59D1704581900B07C3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FE4550A518456B10001C5509 /* BZPasscodeViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BZPasscodeViewController.bundle; sourceTree = "<group>"; };
+		FEDA907018B4110100444DE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/BZPasscodeViewController.strings; sourceTree = "<group>"; };
+		FEDA907218B4111C00444DE9 /* ro */ = {isa = PBXFileReference; lastKnownFileType = file; name = ro; path = ro.lproj/BZPasscodeViewController.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +162,7 @@
 		D7CCF590170457AE00B07C3A /* BZPasscodeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FEDA907118B4110100444DE9 /* BZPasscodeViewController.strings */,
 				FE4550A518456B10001C5509 /* BZPasscodeViewController.bundle */,
 				D7CCF591170457AE00B07C3A /* BZPasscodeFieldController.xib */,
 				874ACCBC1712EF510056C6B9 /* BZPasscodeFieldController~iphone.xib */,
@@ -208,6 +212,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ro,
 			);
 			mainGroup = D70DA1A516FF0D2900935E20;
 			productRefGroup = D70DA1AF16FF0D2900935E20 /* Products */;
@@ -234,6 +239,7 @@
 				D70DA1CE16FF0D2900935E20 /* MainStoryboard_iPad.storyboard in Resources */,
 				D70DA1CB16FF0D2900935E20 /* MainStoryboard_iPhone.storyboard in Resources */,
 				874ACCBD1712EF510056C6B9 /* BZPasscodeFieldController~iphone.xib in Resources */,
+				FEDA906F18B4110100444DE9 /* BZPasscodeViewController.strings in Resources */,
 				874ACCBF1712EF600056C6B9 /* BZPasscodeViewController~iphone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +287,15 @@
 				D70DA1CD16FF0D2900935E20 /* en */,
 			);
 			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		FEDA907118B4110100444DE9 /* BZPasscodeViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FEDA907018B4110100444DE9 /* en */,
+				FEDA907218B4111C00444DE9 /* ro */,
+			);
+			name = BZPasscodeViewController.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

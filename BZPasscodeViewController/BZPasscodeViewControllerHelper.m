@@ -180,6 +180,19 @@
         if (!passcodeViewController_.keypadEnabled) {
             [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
         }
+        
+        //
+        //  Accesibility
+        //
+        
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, NSLocalizedStringFromTable(@"Incorrect passcode.",
+                                                                                                            @"BZPasscodeViewController",
+                                                                                                            @"Context: 'The entered passcode is incorrect.'"));
+        
+        //
+        //  Return
+        //
+        
         return BZPasscodeViewControllerResultInvalid;
     } else {
         self.failedAttempts = 0;
@@ -199,10 +212,19 @@
     passcodeViewController_.detailTextHighlighted = NO;
     if (waitingTime > 0) {
         NSUInteger minutes = ceil(waitingTime / 60);
-        passcodeViewController_.text = [NSString stringWithFormat:((minutes == 1) ? NSLocalizedString(@"Try again in %lu minute", @"") : NSLocalizedString(@"Try again in %lu minutes", @"")), (unsigned long)minutes];
+        passcodeViewController_.text = [NSString stringWithFormat:((minutes == 1) ?
+                                           NSLocalizedStringFromTable(@"Try again in %lu minute",
+                                                                      @"BZPasscodeViewController",
+                                                                      nil) :
+                                           NSLocalizedStringFromTable(@"Try again in %lu minutes",
+                                                                      @"BZPasscodeViewController",
+                                                                      nil)),
+                                        (unsigned long)minutes];
         passcodeViewController_.keypadEnabled = NO;
     } else {
-        passcodeViewController_.text = NSLocalizedString(@"Enter your passcode", @"");
+        passcodeViewController_.text = NSLocalizedStringFromTable(@"Enter your passcode",
+                                                                  @"BZPasscodeViewController",
+                                                                  @"Context: 'Enter your passcode'.");
         passcodeViewController_.keypadEnabled = YES;
     }
     switch (failedAttempts_) {
@@ -210,11 +232,15 @@
             passcodeViewController_.detailText = nil;
             break;
         case 1:
-            passcodeViewController_.detailText = [NSString stringWithFormat:NSLocalizedString(@"%lu Failed Passcode Attempt", @""), (unsigned long)failedAttempts_];
+            passcodeViewController_.detailText = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%lu Failed Passcode Attempt",
+                                                                                                       @"BZPasscodeViewController",
+                                                                                                       nil), (unsigned long)failedAttempts_];
             passcodeViewController_.detailTextHighlighted = YES;
             break;
         default:
-            passcodeViewController_.detailText = [NSString stringWithFormat:NSLocalizedString(@"%lu Failed Passcode Attempts", @""), (unsigned long)failedAttempts_];
+            passcodeViewController_.detailText = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%lu Failed Passcode Attempts",
+                                                                                                       @"BZPasscodeViewController",
+                                                                                                       nil), (unsigned long)failedAttempts_];
             passcodeViewController_.detailTextHighlighted = YES;
             break;
     }
@@ -271,6 +297,19 @@ enum {
             if (!passcodeViewController_.keypadEnabled) {
                 [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
             }
+            
+            //
+            //  Accesibility
+            //
+            
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, NSLocalizedStringFromTable(@"Incorrect passcode.",
+                                                                                                                @"BZPasscodeViewController",
+                                                                                                                @"Context: 'The entered passcode is incorrect.'"));
+            
+            //
+            //  Return
+            //
+            
             return BZPasscodeViewControllerResultInvalid;
         } else {
             self.unlocked = YES;
@@ -278,6 +317,17 @@ enum {
             self.failedDate = nil;
             [self saveDefaults];
             [self updatePasscodeView];
+            
+            //
+            //  Accesibility
+            //
+            
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, passcodeViewController_.text);
+            
+            //
+            //  Return
+            //
+            
             return BZPasscodeViewControllerResultContinue;
         }
     } else {
@@ -287,11 +337,33 @@ enum {
             if (passcode_ && [passcode isEqualToString:passcode_]) {
                 self.error = kPasscodeSameError;
                 [self updatePasscodeView];
+                
+                //
+                //  Accesibility
+                //
+                
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, passcodeViewController_.detailText);
+                
+                //
+                //  Return
+                //
+                
                 return BZPasscodeViewControllerResultInvalid;
             } else {
                 self.newPasscode = passcode;
                 self.error = kPasscodeNoError;
                 [self updatePasscodeView];
+                
+                //
+                //  Accesibility
+                //
+                
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, passcodeViewController_.text);
+                
+                //
+                //  Return
+                //
+                
                 return BZPasscodeViewControllerResultContinue;
             }
         } else {
@@ -300,6 +372,17 @@ enum {
                 self.newPasscode = nil;
                 self.error = kPasscodeMismatchError;
                 [self updatePasscodeView];
+                
+                //
+                //  Accesibility
+                //
+                
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, passcodeViewController_.detailText);
+                
+                //
+                //  Return
+                //
+                
                 return BZPasscodeViewControllerResultContinue;
             } else {
                 if ([delegate_ respondsToSelector:@selector(passcodeViewControllerSetHelperDidFinish:)]) {
@@ -320,10 +403,10 @@ enum {
         NSTimeInterval waitingTime = [self waitingTimeIntervalSinceNow];
         if (waitingTime > 0) {
             NSUInteger minutes = ceil(waitingTime / 60);
-            passcodeViewController_.text = [NSString stringWithFormat:((minutes == 1) ? NSLocalizedString(@"Try again in %lu minute", @"") : NSLocalizedString(@"Try again in %lu minutes", @"")), (unsigned long)minutes];
+            passcodeViewController_.text = [NSString stringWithFormat:((minutes == 1) ? NSLocalizedStringFromTable(@"Try again in %lu minute", @"BZPasscodeViewController", nil) : NSLocalizedStringFromTable(@"Try again in %lu minutes", @"BZPasscodeViewController", nil)), (unsigned long)minutes];
             passcodeViewController_.keypadEnabled = NO;
         } else {
-            passcodeViewController_.text = NSLocalizedString(@"Enter your old passcode", @"");
+            passcodeViewController_.text = NSLocalizedStringFromTable(@"Enter your old passcode", @"BZPasscodeViewController", nil);
             passcodeViewController_.keypadEnabled = YES;
         }
         switch (failedAttempts_) {
@@ -331,11 +414,11 @@ enum {
                 passcodeViewController_.detailText = nil;
                 break;
             case 1:
-                passcodeViewController_.detailText = [NSString stringWithFormat:NSLocalizedString(@"%lu Failed Passcode Attempt", @""), (unsigned long)failedAttempts_];
+                passcodeViewController_.detailText = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%lu Failed Passcode Attempt", @"BZPasscodeViewController", nil), (unsigned long)failedAttempts_];
                 passcodeViewController_.detailTextHighlighted = YES;
                 break;
             default:
-                passcodeViewController_.detailText = [NSString stringWithFormat:NSLocalizedString(@"%lu Failed Passcode Attempts", @""), (unsigned long)failedAttempts_];
+                passcodeViewController_.detailText = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%lu Failed Passcode Attempts", @"BZPasscodeViewController", nil), (unsigned long)failedAttempts_];
                 passcodeViewController_.detailTextHighlighted = YES;
                 break;
         }
@@ -345,10 +428,14 @@ enum {
             // 1st stage
             if (!passcode_) {
                 // set
-                passcodeViewController_.text = NSLocalizedString(@"Enter a passcode", @"");
+                passcodeViewController_.text = NSLocalizedStringFromTable(@"Enter a passcode",
+                                                                          @"BZPasscodeViewController",
+                                                                          @"Context: 'Enter a passcode'. This will show up only when setting a passcode and not when changing it.");
                 switch (error_) {
                     case kPasscodeMismatchError:
-                        passcodeViewController_.detailText = NSLocalizedString(@"Passcodes did not match. Try again.", @"");
+                        passcodeViewController_.detailText = NSLocalizedStringFromTable(@"Passcodes did not match. Try again.",
+                                                                                        @"BZPasscodeViewController",
+                                                                                        @"Context: 'Passcodes did not match.'.");
                         break;
                     default:
                         passcodeViewController_.detailText = nil;
@@ -356,13 +443,15 @@ enum {
                 }
             } else {
                 // change
-                passcodeViewController_.text = NSLocalizedString(@"Enter your new passcode", @"");
+                passcodeViewController_.text = NSLocalizedStringFromTable(@"Enter your new passcode", @"BZPasscodeViewController", nil);
                 switch (error_) {
                     case kPasscodeSameError:
-                        passcodeViewController_.detailText = NSLocalizedString(@"Enter a different passcode. Cannot re-use the same passcode.", @"");
+                        passcodeViewController_.detailText = NSLocalizedStringFromTable(@"Enter a different passcode. Cannot re-use the same passcode.", @"BZPasscodeViewController", nil);
                         break;
                     case kPasscodeMismatchError:
-                        passcodeViewController_.detailText = NSLocalizedString(@"Passcodes did not match. Try again.", @"");
+                        passcodeViewController_.detailText = NSLocalizedStringFromTable(@"Passcodes did not match. Try again.",
+                                                                                        @"BZPasscodeViewController",
+                                                                                        @"Context: 'Passcodes did not match.'.");
                         break;
                     default:
                         passcodeViewController_.detailText = nil;
@@ -373,10 +462,14 @@ enum {
             // 2nd stage
             if (!passcode_) {
                 // set
-                passcodeViewController_.text = NSLocalizedString(@"Re-enter your passcode", @"");
+                passcodeViewController_.text = NSLocalizedStringFromTable(@"Re-enter your passcode",
+                                                                          @"BZPasscodeViewController",
+                                                                          @"Context: 'Re-enter your passcode'. Confirm your passcode (re-enter the same passcode).");
             } else {
                 // change
-                passcodeViewController_.text = NSLocalizedString(@"Re-enter your new passcode", @"");
+                passcodeViewController_.text = NSLocalizedStringFromTable(@"Re-enter your new passcode",
+                                                                          @"BZPasscodeViewController",
+                                                                          @"Context: 'Re-enter your new passcode'. Confirm your passcode (re-enter the same passcode).");
             }
             passcodeViewController_.detailText = nil;
         }
